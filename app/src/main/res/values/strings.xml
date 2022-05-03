@@ -10,4 +10,5 @@
     <string name="profile_picture">Profile picture</string>
     <string name="edit">Edit</string>
     <string name="remove">Remove</string>
+    <string name="empty_list">There is no user registered</string>
 </resources>
