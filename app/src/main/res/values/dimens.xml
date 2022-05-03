@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_10_dp">10dp</dimen>
+    <dimen name="margin_25_dp">25dp</dimen>
+
+    <dimen name="image_view_item_size">60dp</dimen>
+</resources>

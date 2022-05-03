@@ -1,3 +1,6 @@
 <resources>
-    <string name="app_name">SimpleProfileView</string>
+    <string name="app_name">Simple User Manager</string>
+    <string name="add_user">Add User</string>
+    <string name="edit_user">Edit User</string>
+    <string name="error_message_field_is_empty">⚠ Complete all the fields before to continue</string>
 </resources>
