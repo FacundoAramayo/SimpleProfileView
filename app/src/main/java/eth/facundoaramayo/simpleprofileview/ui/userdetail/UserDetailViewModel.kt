@@ -5,43 +5,66 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import eth.facundoaramayo.simpleprofileview.domain.CreateUserUseCase
 import eth.facundoaramayo.simpleprofileview.domain.EditUserUseCase
 import eth.facundoaramayo.simpleprofileview.domain.model.UserModel
 import kotlinx.coroutines.launch
+import java.lang.Exception
 import javax.inject.Inject
 
 @HiltViewModel
 class UserDetailViewModel @Inject constructor(
-    private val getEditUserUseCase: EditUserUseCase
+    private val getEditUserUseCase: EditUserUseCase,
+    private val getCreateUserUseCase: CreateUserUseCase
 ): ViewModel() {
 
-    private var userSubmitted: MutableLiveData<UserModel> = MutableLiveData()
+    var isEditing = false
+    var avatarUri = ""
+    var currentUser: UserModel? = null
+
     private var isError: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isLoading: MutableLiveData<Boolean> = MutableLiveData(false)
     private var isCompleted: MutableLiveData<Boolean> = MutableLiveData(false)
 
-    fun submitUser(name: String, description: String, avatarUri: String) {
+    fun submitUser(name: String, description: String) {
         isError.postValue(false)
         when {
-            name.isEmpty() -> isError.postValue(true)
-            description.isEmpty() -> isError.postValue(true)
+            name.isEmpty() ||
+            description.isEmpty() ||
             avatarUri.isEmpty() -> isError.postValue(true)
             else -> {
-                val user = UserModel(name = name, description = description, avatar = avatarUri)
-                saveUser(user)
-                //userSubmitted.postValue()
+                var user: UserModel
+                currentUser?.let {
+                    it.name = name
+                    it.description = description
+                    it.avatar = avatarUri
+                    user = it
+                    saveUser(user)
+                } ?: run {
+                    user = UserModel(name = name, description = description, avatar = avatarUri)
+                    saveUser(user)
+                }
             }
         }
     }
 
     private fun saveUser(userModel: UserModel) {
         viewModelScope.launch {
-            isLoading.postValue(true)
-            val result = getEditUserUseCase.invoke(userModel)
+            try {
+                isLoading.postValue(true)
+                val result =
+                    if (isEditing)
+                        getEditUserUseCase.invoke(userModel)
+                    else
+                        getCreateUserUseCase.invoke(userModel)
 
-            if (result) {
+                if (result) {
+                    isLoading.postValue(false)
+                    isCompleted.postValue(true)
+                }
+            } catch (e: Exception) {
                 isLoading.postValue(false)
-                isCompleted.postValue(true)
+                isError.postValue(true)
             }
         }
     }
@@ -49,5 +72,4 @@ class UserDetailViewModel @Inject constructor(
     fun observeError(): LiveData<Boolean> = isError
     fun observeLoading(): LiveData<Boolean> = isLoading
     fun observeIsCompleted(): LiveData<Boolean> = isCompleted
-    fun observeUser(): LiveData<UserModel> = userSubmitted
 }

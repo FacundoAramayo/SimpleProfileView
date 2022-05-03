@@ -11,3 +11,10 @@ fun ImageView.setImage(data: Uri?) {
         .transform(CircleCrop())
         .into(this)
 }
+
+fun ImageView.setImage(data: String?) {
+    Glide.with(this.context)
+        .load(data)
+        .transform(CircleCrop())
+        .into(this)
+}

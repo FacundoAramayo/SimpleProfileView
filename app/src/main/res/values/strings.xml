@@ -3,4 +3,11 @@
     <string name="add_user">Add User</string>
     <string name="edit_user">Edit User</string>
     <string name="error_message_field_is_empty">⚠ Complete all the fields before to continue</string>
+    <string name="save">Save</string>
+    <string name="description">Description</string>
+    <string name="name">Name</string>
+    <string name="pick_image">Pick image</string>
+    <string name="profile_picture">Profile picture</string>
+    <string name="edit">Edit</string>
+    <string name="remove">Remove</string>
 </resources>

@@ -9,7 +9,7 @@ import eth.facundoaramayo.simpleprofileview.domain.model.UserModel
 data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id")
-    val id: Int = 0,
+    val id: Int,
     @ColumnInfo(name = "name")
     val name: String = "",
     @ColumnInfo(name = "description")
@@ -18,4 +18,5 @@ data class UserEntity(
     val avatarUri: String = ""
 )
 
-fun UserModel.toDatabase() = UserEntity(name = name, description = description, avatarUri = avatar)
+fun UserModel.toDatabase() =
+    UserEntity(id = id ?: 0, name = name, description = description, avatarUri = avatar)

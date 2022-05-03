@@ -20,7 +20,7 @@ class UserRepository @Inject constructor(
     }
 
     suspend fun editUser(userModel: UserModel) {
-        userDao.insertUser(userModel.toDatabase())
+        userDao.updateUser(userModel.toDatabase())
     }
 
     suspend fun deleteUser(id: Int) {
