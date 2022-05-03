@@ -62,7 +62,7 @@ class UsersListViewModelTest {
     @Test
     fun `if requestUsers return a list of users show the list`() = runTest {
         // GIVEN
-        val response = listOf<UserModel>(
+        val response = listOf(
             UserModel(1, "Mock", "Description", "Uri"),
             UserModel(1, "Mock", "Description", "Uri"),
             UserModel(1, "Mock", "Description", "Uri")

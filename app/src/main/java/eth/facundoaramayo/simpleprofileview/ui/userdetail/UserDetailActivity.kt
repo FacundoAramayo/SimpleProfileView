@@ -7,7 +7,6 @@ import android.view.MenuItem
 import android.view.View
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.ViewModelProvider
 import dagger.hilt.android.AndroidEntryPoint
 import eth.facundoaramayo.simpleprofileview.R
 import eth.facundoaramayo.simpleprofileview.databinding.ActivityUserDetailBinding

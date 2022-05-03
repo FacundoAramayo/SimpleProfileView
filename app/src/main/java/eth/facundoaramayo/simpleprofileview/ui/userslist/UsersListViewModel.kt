@@ -54,10 +54,8 @@ class UsersListViewModel @Inject constructor(
             try {
                 isLoading.postValue(true)
                 user.id?.let {
-                    val result = getRemoveUserUseCase.invoke(user.id)
-                    result?.let {
-                        requestUsers()
-                    }
+                    getRemoveUserUseCase.invoke(user.id)
+                    requestUsers()
                 }
             } catch (e: Exception) {
                 isLoading.postValue(false)

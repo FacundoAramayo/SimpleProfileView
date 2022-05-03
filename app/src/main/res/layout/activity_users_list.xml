@@ -42,7 +42,7 @@
         android:id="@+id/btn_add_user"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add user"
+        android:text="@string/add_user"
         android:layout_margin="@dimen/margin_10_dp"
         app:layout_constraintBottom_toBottomOf="parent" />
 
